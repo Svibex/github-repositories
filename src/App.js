@@ -8,6 +8,7 @@ function App() {
 
     function submitHandler(event) {
         event.preventDefault();
+        if (!repoName) return
         setLoading(true);
         const fetchData = async () => {
             await fetch('https://api.github.com/search/repositories?q=' + repoName)
@@ -15,15 +16,13 @@ function App() {
                 .then(data => {
                     setRepos(data.items);
                     setLoading(false);
-                    if (!data.items.length) setIsEmpty(true)
+                    if (!data.items.length) setIsEmpty(true);
                     else setIsEmpty(false);
                 })
                 .catch((error) => alert(error))
-                .finally(() => {
-                    setRepoName('');
-                })
+                .finally(() => setRepoName(''));
         }
-        fetchData()
+        fetchData();
     }
 
     return (
@@ -36,12 +35,16 @@ function App() {
                        autoFocus
                 />
                 <div>
-                    <button type="submit" onClick={submitHandler}>Найти</button>
+                    <button
+                        type="submit"
+                        onClick={submitHandler}>
+                        Найти
+                    </button>
                 </div>
             </form>
             <div className="listWrapper">
-                {isEmpty ? <h2>По Вашему запросу репозитории не найдены</h2> : ""}
-                {loading && <div className="lds-dual-ring"></div>}
+                {isEmpty ? <h2>По Вашему запросу репозитории не найдены</h2> : null}
+                {loading && <div className="lds-dual-ring"/>}
                 {!loading &&
                 repos.map(repo =>
                     <div key={repo.id}
