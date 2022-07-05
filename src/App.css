@@ -92,7 +92,7 @@ form, .card {
 }
 
 form {
-    height: 150px;
+    height: 120px;
     width: 700px;
 }
 
@@ -101,7 +101,7 @@ img {
 }
 
 input {
-    color: #272d33;
+    color: #f0f6fc;
     background: #010409;
     padding-left: 15px;
     width: 300px;

@@ -1,30 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 function App() {
-    const [repos, setRepos] = useState()
-    const [repoName, setRepoName] = useState('')
-    const [fetching, setFetching] = useState(true);
-
-    useEffect((repoName) => {
-        // if (repoName) {
-        if (fetching) {
-            fetch('https://api.github.com/search/repositories?q=' + "netlify-statuskit")
-        .then(response => {
-                return response.json();
-            })
-                .then(data => {
-                    console.log(data.items)
-                    setRepos(data.items)
-                })
-                .finally(() => setFetching(false))
-        }
-    }
-    // }
-    , [fetching]);
+    const [repos, setRepos] = useState([]);
+    const [repoName, setRepoName] = useState('');
+    const [isEmpty, setIsEmpty] = useState(false);
 
     function submitHandler(event) {
         event.preventDefault();
-        setRepoName('');
+        const fetchData = async () => {
+            await fetch('https://api.github.com/search/repositories?q=' + repoName)
+                .then(response => response.json())
+                .then(data => {
+                    setRepos(data.items);
+                    console.log(data.items);
+                    if (!data.items.length) setIsEmpty(true)
+                    else setIsEmpty(false);
+                })
+                .catch((error) => alert(error))
+                .finally(() => {
+                    setRepoName('');
+                })
+        }
+        fetchData()
     }
 
     return (
@@ -33,32 +30,28 @@ function App() {
             <form>
                 <input placeholder="Введите название репозитория"
                        value={repoName}
-                       onChange={event => event.target.value}
+                       onChange={event => setRepoName(event.target.value)}
+                       autoFocus
                 />
                 <div>
-                    <button
-                        type="submit"
-                        onClick={submitHandler}>
-                        Найти
-                    </button>
+                    <button type="submit" onClick={submitHandler}>Найти</button>
                 </div>
             </form>
-                <div>
-                    {repos?.map(repo =>
-                        // !repo ? <h2>По Вашему запросу репозитории не найдены</h2> :
-                        <div key={repo.id}
-                             className="card">
-                            <div>
-                                <a className="h2" href={repo.url}>{repo.name}</a>
-                                <h2>{repo.owner.login}</h2>
-                                <div>{repo.private ? "Приватный репозиторий" : "Публичный репозиторий"}</div>
-                                <div>{repo.language}</div>
-                            </div>
-                            <img src={repo.owner.avatar_url} alt={repo.owner.login}/>
+            <div>
+                {isEmpty ? <h2>По Вашему запросу репозитории не найдены</h2> : ""}
+                {repos.map(repo =>
+                    <div key={repo.id}
+                         className="card">
+                        <div>
+                            <a className="h2" href={repo.html_url}>{repo.name}</a>
+                            <h2>{repo.owner.login}</h2>
+                            <div>{repo.private ? "Приватный репозиторий" : "Публичный репозиторий"}</div>
+                            <div>{repo.language}</div>
                         </div>
-                    )
-                    }
-                </div>
+                        <img src={repo.owner.avatar_url} alt={repo.owner.login}/>
+                    </div>
+                )}
+            </div>
         </>
     );
 }
