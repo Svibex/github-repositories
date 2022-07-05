@@ -8,7 +8,7 @@ function App() {
     useEffect((repoName) => {
         // if (repoName) {
         if (fetching) {
-            fetch('https://api.github.com/search/repositories?q=' + "blank-for-basket")
+            fetch('https://api.github.com/search/repositories?q=' + "netlify-statuskit")
         .then(response => {
                 return response.json();
             })
@@ -49,7 +49,7 @@ function App() {
                         <div key={repo.id}
                              className="card">
                             <div>
-                                <a href={repo.url}><h2>{repo.name}</h2></a>
+                                <a className="h2" href={repo.url}>{repo.name}</a>
                                 <h2>{repo.owner.login}</h2>
                                 <div>{repo.private ? "Приватный репозиторий" : "Публичный репозиторий"}</div>
                                 <div>{repo.language}</div>

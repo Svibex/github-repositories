@@ -26,6 +26,10 @@ body {
     justify-content: center;
 }
 
+div {
+    padding: 5px 0;
+}
+
 .root {
     display: flex;
     flex-direction: column;
@@ -43,7 +47,7 @@ h1 {
     font-size: 40px;
 }
 
-h2 {
+h2, .h2 {
     font-size: 30px;
     margin: 10px 0;
 }
@@ -54,6 +58,21 @@ button {
     width: 175px;
     margin-right: 25px;
     border-radius: 10px;
+}
+
+button:hover {
+    background-color: #2ea043;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #238636;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #167cc4;
+    cursor: pointer;
 }
 
 form, .card {
@@ -67,9 +86,9 @@ form, .card {
 
 .card {
     margin-top: 20px;
-    padding: 15px;
+    padding: 20px;
     height: 200px;
-    width: 670px;
+    width: 660px;
 }
 
 form {
