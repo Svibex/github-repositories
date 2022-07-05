@@ -4,15 +4,17 @@ function App() {
     const [repos, setRepos] = useState([]);
     const [repoName, setRepoName] = useState('');
     const [isEmpty, setIsEmpty] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     function submitHandler(event) {
         event.preventDefault();
+        setLoading(true);
         const fetchData = async () => {
             await fetch('https://api.github.com/search/repositories?q=' + repoName)
                 .then(response => response.json())
                 .then(data => {
                     setRepos(data.items);
-                    console.log(data.items);
+                    setLoading(false);
                     if (!data.items.length) setIsEmpty(true)
                     else setIsEmpty(false);
                 })
@@ -37,9 +39,11 @@ function App() {
                     <button type="submit" onClick={submitHandler}>Найти</button>
                 </div>
             </form>
-            <div>
+            <div className="listWrapper">
                 {isEmpty ? <h2>По Вашему запросу репозитории не найдены</h2> : ""}
-                {repos.map(repo =>
+                {loading && <div className="lds-dual-ring"></div>}
+                {!loading &&
+                repos.map(repo =>
                     <div key={repo.id}
                          className="card">
                         <div>
