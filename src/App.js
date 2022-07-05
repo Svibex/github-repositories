@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
 
 function App() {
     const [repos, setRepos] = useState()
@@ -7,9 +6,9 @@ function App() {
     const [fetching, setFetching] = useState(true);
 
     useEffect((repoName) => {
-        if (repoName) {
+        // if (repoName) {
         if (fetching) {
-            fetch('https://api.github.com/search/repositories?q=' + repoName)
+            fetch('https://api.github.com/search/repositories?q=' + "blank-for-basket")
         .then(response => {
                 return response.json();
             })
@@ -19,7 +18,9 @@ function App() {
                 })
                 .finally(() => setFetching(false))
         }
-    }}, [fetching]);
+    }
+    // }
+    , [fetching]);
 
     function submitHandler(event) {
         event.preventDefault();
@@ -28,6 +29,7 @@ function App() {
 
     return (
         <>
+            <h1>Поиск репозиториев по <a href="https://github.com/" className="h1">GitHub</a></h1>
             <form>
                 <input placeholder="Введите название репозитория"
                        value={repoName}
@@ -41,16 +43,22 @@ function App() {
                     </button>
                 </div>
             </form>
-            {!repoName ? <h2>Список репозиториев пуст...</h2> :
                 <div>
                     {repos?.map(repo =>
-                        !repo ? <h2>По Вашему запросу репозитории не найдены</h2> :
-                        <div key={repo.id}>
-                            <a href={repo.url}><h2>{repo.name}</h2></a>
-                            {repo.name}
-                        </div>)}
+                        // !repo ? <h2>По Вашему запросу репозитории не найдены</h2> :
+                        <div key={repo.id}
+                             className="card">
+                            <div>
+                                <a href={repo.url}><h2>{repo.name}</h2></a>
+                                <h2>{repo.owner.login}</h2>
+                                <div>{repo.private ? "Приватный репозиторий" : "Публичный репозиторий"}</div>
+                                <div>{repo.language}</div>
+                            </div>
+                            <img src={repo.owner.avatar_url} alt={repo.owner.login}/>
+                        </div>
+                    )
+                    }
                 </div>
-            }
         </>
     );
 }

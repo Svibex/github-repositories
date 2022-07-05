@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "Circe";
+    src: url("./fonts/Circe-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Circe";
+    src: url("./fonts/Circe-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    font-family: Circe, sans-serif;
+    color: #f0f6fc;
+    font-size: 20px;
+}
+
+html {
+    background: #010409;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #238636;
+    height: 47px;
+    width: 175px;
+    margin-right: 25px;
+    border-radius: 10px;
+}
+
+form, .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0d1117;
+    border: 1px solid #272d33;
+    border-radius: 10px;
+}
+
+.card {
+    margin-top: 20px;
+    padding: 15px;
+    height: 200px;
+    width: 670px;
+}
+
+form {
+    height: 150px;
+    width: 700px;
+}
+
+img {
+    height: 150px;
+}
+
+input {
+    color: #272d33;
+    background: #010409;
+    padding-left: 15px;
+    width: 300px;
+    height: 40px;
+    margin-left: 25px;
+    border-radius: 10px;
+}
