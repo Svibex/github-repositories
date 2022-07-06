@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/github-repositories/static/css/main.07d7327c.css",
+    "main.js": "/github-repositories/static/js/main.802c8c03.js",
+    "static/media/Circe-Regular.ttf": "/github-repositories/static/media/Circe-Regular.f80cf2f1a50fc5107f4c.ttf",
+    "static/media/Circe-Bold.ttf": "/github-repositories/static/media/Circe-Bold.d9332714c66b14bb30e5.ttf",
+    "index.html": "/github-repositories/index.html",
+    "main.07d7327c.css.map": "/github-repositories/static/css/main.07d7327c.css.map",
+    "main.802c8c03.js.map": "/github-repositories/static/js/main.802c8c03.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07d7327c.css",
+    "static/js/main.802c8c03.js"
+  ]
+}
